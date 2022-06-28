@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+
+
+   <body style="background: #000;">
+ <div class="login">
+	<h1 style="color:Violet;">Heart disease prediction</h1>
+
+     <!-- Action is where the data is sent. In our case, predict page.
+     If action is omitted, it assumed to be the current page -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<input type="text" name="percent biking" placeholder="Percent population biking" required="required" /><br>
+        <input type="text" name="percent smoking" placeholder="Percent population smoking" required="required" /><p>
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict percent population with heart disease</button></p>
+    </form>
+
+   <br>
+   <br>
+   <h4 style="color:Violet;">
+   {{ prediction_text }} </h4>
+
+     Priyank
+
+ </div>
+
+ <form>
+     <button type='button' id ='retrieve'>Click to see ALE plot</button>
+     <img src="" id="myimg" />
+ </form>
+   </body>
+  <script>
+    $(document).ready(function() {
+       $('#retrieve').click(function(){
+           $.ajax({
+           url: "{{ url_for ('get_img') }}",
+           type: "GET",
+           success: function(response) {
+               $("#myimg").attr('src', '/static/ss/' + response);
+<!--           $("#myimg").attr('src', '/C:/Users/u393845/wns_web_flask/xai_plots/' + response);-->
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+         }
+         });
+       });
+    });
+  </script>
+</html>
